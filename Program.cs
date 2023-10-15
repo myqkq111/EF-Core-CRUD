@@ -1,3 +1,4 @@
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Test3.Data;
@@ -7,8 +8,8 @@ using Test3.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<ModelContext>(options => options.UseOracle(builder.Configuration.GetConnectionString("OracleDBConnection")));
-builder.Services.AddTransient<IEmpRepository, EmpRepository>();
+builder.Services.AddDbContext<ModelContext>(options => options.UseOracle(builder.Configuration.GetConnectionString("OracleDBConnection") ,b => b.UseOracleSQLCompatibility("11")));
+builder.Services.AddScoped<IEmpRepository, EmpRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

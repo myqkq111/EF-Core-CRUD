@@ -33,7 +33,9 @@ namespace Test3.Data
 
                 entity.Property(e => e.Empno)
                     .HasPrecision(4)
-                    .HasColumnName("EMPNO");
+                    .HasColumnName("EMPNO")
+                    .ValueGeneratedOnAdd()
+                    .UseHiLo("EMP_SEQ");
                 entity.Property(e => e.Comm)
                     .HasColumnType("NUMBER(7,2)")
                     .HasColumnName("COMM");
